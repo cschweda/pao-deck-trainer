@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Memory Trainer</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-100">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const cardSets = [
+        {
+          cards: ["AS", "KH", "QD"],
+          person: "Albert Einstein",
+          action: "juggling",
+          object: "glowing lightbulb",
+          scene: "Einstein juggling lightbulbs",
+        },
+        {
+          cards: ["JC", "10S", "9H"],
+          person: "Bruce Lee",
+          action: "karate chopping",
+          object: "brick wall",
+          scene: "Bruce Lee karate chopping a brick wall",
+        },
+        {
+          cards: ["8D", "7C", "6S"],
+          person: "Marilyn Monroe",
+          action: "dancing",
+          object: "red dress",
+          scene: "Marilyn Monroe dancing in a red dress",
+        },
+        {
+          cards: ["5H", "4D", "3C"],
+          person: "Michael Jordan",
+          action: "slam dunking",
+          object: "golden basketball",
+          scene: "Michael Jordan slam dunking a golden basketball",
+        },
+        {
+          cards: ["2S", "AH", "KC"],
+          person: "Charlie Chaplin",
+          action: "tap dancing",
+          object: "black cane",
+          scene: "Charlie Chaplin tap dancing with a black cane",
+        },
+        {
+          cards: ["QS", "JD", "10H"],
+          person: "Lady Gaga",
+          action: "singing",
+          object: "grand piano",
+          scene: "Lady Gaga singing at a grand piano",
+        },
+        {
+          cards: ["9C", "8S", "7H"],
+          person: "Muhammad Ali",
+          action: "boxing",
+          object: "golden gloves",
+          scene: "Muhammad Ali boxing with golden gloves",
+        },
+        {
+          cards: ["6D", "5C", "4S"],
+          person: "Marie Curie",
+          action: "pouring",
+          object: "glowing test tube",
+          scene: "Marie Curie pouring a glowing test tube",
+        },
+        {
+          cards: ["3H", "2D", "AC"],
+          person: "David Copperfield",
+          action: "levitating",
+          object: "magic wand",
+          scene: "David Copperfield levitating a magic wand",
+        },
+        {
+          cards: ["KS", "QH", "JC"],
+          person: "Arnold Schwarzenegger",
+          action: "lifting",
+          object: "giant dumbbell",
+          scene: "Arnold lifting a giant dumbbell",
+        },
+        {
+          cards: ["10D", "9S", "8C"],
+          person: "Elvis Presley",
+          action: "strumming",
+          object: "blue suede shoes",
+          scene: "Elvis strumming in blue suede shoes",
+        },
+        {
+          cards: ["7D", "6H", "5S"],
+          person: "Houdini",
+          action: "escaping",
+          object: "steel chains",
+          scene: "Houdini escaping from steel chains",
+        },
+        {
+          cards: ["4H", "3D", "2C"],
+          person: "Serena Williams",
+          action: "serving",
+          object: "tennis racket",
+          scene: "Serena Williams serving with a tennis racket",
+        },
+      ];
+
+      function CardMemoryApp() {
+        const [currentSetIndex, setCurrentSetIndex] = React.useState(0);
+        const [showAnswer, setShowAnswer] = React.useState(false);
+        const [streak, setStreak] = React.useState(0);
+
+        const currentSet = cardSets[currentSetIndex];
+
+        const getCardImage = (card) => {
+          const suit = card.slice(-1);
+          const rank = card.slice(0, -1);
+          const suitSymbol = {
+            H: "♥",
+            D: "♦",
+            C: "♣",
+            S: "♠",
+          }[suit];
+
+          const isRed = suit === "H" || suit === "D";
+          const color = isRed ? "text-red-600" : "text-black";
+
+          return (
+            <div
+              className={`playing-card w-24 h-36 flex items-center justify-center ${color} font-bold text-3xl card-shadow select-none`}
+            >
+              {rank}
+              {suitSymbol}
+            </div>
+          );
+        };
+
+        const nextSet = () => {
+          setShowAnswer(false);
+          setCurrentSetIndex((prev) => (prev + 1) % cardSets.length);
+        };
+
+        const checkAnswer = (isCorrect) => {
+          if (isCorrect) {
+            setStreak((prev) => prev + 1);
+          } else {
+            setStreak(0);
+          }
+          nextSet();
+        };
+
+        return (
+          <div className="min-h-screen py-12 px-4">
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-white rounded-xl shadow-lg backdrop-blur-sm bg-white/90">
+                <div className="p-8">
+                  <div className="text-center mb-10">
+                    <h1 className="text-3xl font-bold text-gray-800 mb-3">
+                      Card Memory Trainer
+                    </h1>
+                    <div className="inline-block px-4 py-2 bg-indigo-50 rounded-full">
+                      <p className="text-indigo-800 font-semibold">
+                        Current streak: {streak}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-8 mb-8">
+                    <div className="flex justify-center gap-6">
+                      {currentSet.cards.map((card, index) => (
+                        <div
+                          key={index}
+                          className="transform transition-all duration-200"
+                        >
+                          {getCardImage(card)}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex justify-center gap-6">
+                      {["Person", "Action", "Object"].map((type, index) => (
+                        <div key={type} className="w-24 text-center">
+                          <div className="text-sm font-semibold text-gray-600 bg-gray-50 rounded-lg py-1">
+                            {type}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <button
+                      className="w-full btn-primary text-white rounded-lg py-3 px-4 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={() => setShowAnswer(true)}
+                      disabled={showAnswer}
+                    >
+                      Show Scene
+                    </button>
+
+                    {showAnswer && (
+                      <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                        <p className="text-center text-xl font-medium text-gray-800 mb-6">
+                          {currentSet.scene}
+                        </p>
+                        <div className="grid grid-cols-3 gap-6 mb-6">
+                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                            <div className="text-sm font-semibold text-gray-800 mb-1">
+                              Person
+                            </div>
+                            <div className="text-sm text-gray-600 mb-1">
+                              {currentSet.person}
+                            </div>
+                            <div className="text-xs font-medium text-indigo-600">
+                              {currentSet.cards[0]}
+                            </div>
+                          </div>
+                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                            <div className="text-sm font-semibold text-gray-800 mb-1">
+                              Action
+                            </div>
+                            <div className="text-sm text-gray-600 mb-1">
+                              {currentSet.action}
+                            </div>
+                            <div className="text-xs font-medium text-indigo-600">
+                              {currentSet.cards[1]}
+                            </div>
+                          </div>
+                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                            <div className="text-sm font-semibold text-gray-800 mb-1">
+                              Object
+                            </div>
+                            <div className="text-sm text-gray-600 mb-1">
+                              {currentSet.object}
+                            </div>
+                            <div className="text-xs font-medium text-indigo-600">
+                              {currentSet.cards[2]}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex gap-3">
+                          <button
+                            className="w-1/2 btn-success text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
+                            onClick={() => checkAnswer(true)}
+                          >
+                            <span className="mr-2">✓</span> Got it right
+                          </button>
+                          <button
+                            className="w-1/2 btn-danger text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
+                            onClick={() => checkAnswer(false)}
+                          >
+                            <span className="mr-2">✗</span> Need practice
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<CardMemoryApp />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
