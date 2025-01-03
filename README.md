@@ -1,10 +1,23 @@
 # PAO Card Memory Trainer
 
-A web-based application to help you memorize a deck of cards using the Person-Action-Object (PAO) system, a powerful memory technique used by memory athletes.
+A web-based application to prepare you for memorizing a full deck of playing cards using the Person-Action-Object (PAO) system, a powerful memory technique used by memory athletes.
+
+General info on the PAO memorization system [here](https://en.wikipedia.org/wiki/Person-Action-Object).
+
+## Getting Started
+
+1. Clone the repository
+2. Open `index.html` in your browser
+3. Practice with the flashcard system
+4. Track your progress with the streak counter
+
+## Demo
+
+https://pao-trainer.netlify.app/
 
 ## What is PAO?
 
-PAO is a memorization system where:
+PAO is a playing card memorization system where:
 
 - Each group of three cards represents a scene
 - The scene consists of a Person performing an Action with an Object
@@ -179,10 +192,3 @@ Each suit has a specific theme to help with memorization:
 2. Create vivid mental images for each card's three possible roles
 3. Practice recalling both forward (card → PAO) and backward (PAO → card)
 4. Use the trainer's spaced repetition to reinforce your memory
-
-## Getting Started
-
-1. Clone the repository
-2. Open `index.html` in your browser
-3. Practice with the flashcard system
-4. Track your progress with the streak counter
