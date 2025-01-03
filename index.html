@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card Memory Trainer</title>
+    <title>PAO Memory Trainer</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
@@ -441,11 +441,11 @@
 
       // Add these helper functions before CardMemoryApp
       const saveState = (state) => {
-        localStorage.setItem('paoTrainerState', JSON.stringify(state));
+        localStorage.setItem("paoTrainerState", JSON.stringify(state));
       };
 
       const loadState = () => {
-        const saved = localStorage.getItem('paoTrainerState');
+        const saved = localStorage.getItem("paoTrainerState");
         if (saved) {
           return JSON.parse(saved);
         }
@@ -458,7 +458,11 @@
 
         // Modify reset function
         const resetEverything = () => {
-          if (window.confirm('Are you sure you want to reset everything? This will clear all progress and stored data.')) {
+          if (
+            window.confirm(
+              "Are you sure you want to reset everything? This will clear all progress and stored data."
+            )
+          ) {
             localStorage.clear();
             const newCardSets = generateRandomTriplets();
             setCurrentSetIndex(0);
@@ -466,7 +470,7 @@
             setStreak(0);
             setSelectedSuit(null);
             setCardSets(newCardSets);
-            
+
             // Show success message
             setShowResetSuccess(true);
             // Hide success message after 3 seconds
@@ -476,10 +480,18 @@
 
         // Initialize state from localStorage or use defaults
         const savedState = loadState();
-        const [currentSetIndex, setCurrentSetIndex] = React.useState(savedState ? savedState.currentSetIndex : 0);
-        const [showAnswer, setShowAnswer] = React.useState(savedState ? savedState.showAnswer : false);
-        const [streak, setStreak] = React.useState(savedState ? savedState.streak : 0);
-        const [selectedSuit, setSelectedSuit] = React.useState(savedState ? savedState.selectedSuit : null);
+        const [currentSetIndex, setCurrentSetIndex] = React.useState(
+          savedState ? savedState.currentSetIndex : 0
+        );
+        const [showAnswer, setShowAnswer] = React.useState(
+          savedState ? savedState.showAnswer : false
+        );
+        const [streak, setStreak] = React.useState(
+          savedState ? savedState.streak : 0
+        );
+        const [selectedSuit, setSelectedSuit] = React.useState(
+          savedState ? savedState.selectedSuit : null
+        );
         const [cardSets, setCardSets] = React.useState(
           savedState ? savedState.cardSets : generateRandomTriplets()
         );
@@ -491,7 +503,7 @@
             showAnswer,
             streak,
             selectedSuit,
-            cardSets
+            cardSets,
           });
         }, [currentSetIndex, showAnswer, streak, selectedSuit, cardSets]);
 
@@ -592,12 +604,12 @@
         // Component render method
         return (
           <div className="min-h-screen">
-            {/* Add GitHub Link */}
+            {/* Add GitHub Link - moved to top right */}
             <a
               href="https://github.com/cschweda/pao-deck-trainer"
               target="_blank"
               rel="noopener noreferrer"
-              className="fixed bottom-4 left-4 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 text-sm font-medium border border-gray-200 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+              className="fixed top-4 right-4 bg-white hover:bg-gray-50 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 text-sm font-medium border border-gray-200 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl z-50"
             >
               <svg className="w-5 h-5 text-gray-900" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -605,14 +617,24 @@
               <span>View on GitHub</span>
             </a>
 
-            {/* Add Reset Success Notification */}
+            {/* Add Reset Success Notification - moved down to avoid overlap */}
             {showResetSuccess && (
-              <div className="fixed top-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg transition-all duration-500 animate-fade-in-down">
+              <div className="fixed top-16 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg transition-all duration-500 animate-fade-in-down">
                 <div className="flex items-center">
-                  <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                  <svg
+                    className="h-5 w-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
                   </svg>
-                  <p className="font-medium">Reset successful! New cards generated.</p>
+                  <p className="font-medium">
+                    Reset successful! New cards generated.
+                  </p>
                 </div>
               </div>
             )}
@@ -623,8 +645,17 @@
               className="fixed bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5"
               title="Reset everything"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span className="font-medium">Reset All</span>
             </button>
@@ -648,12 +679,32 @@
                           href="info.html"
                           className="reference-guide-button inline-flex items-center gap-2 px-6 py-3 text-gray-800 rounded-lg transition-all duration-200 group"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 text-indigo-600"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                              clipRule="evenodd"
+                            />
                           </svg>
-                          <span className="font-semibold">PAO System Reference Guide</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          <span className="font-semibold">
+                            PAO System Reference Guide
+                          </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                         </a>
                       </div>
