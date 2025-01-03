@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAO System Reference</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-100">
+    <noscript>
+      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg
+              class="h-5 w-5 text-yellow-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-yellow-700">
+              JavaScript is required for full functionality, including state
+              persistence between pages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </noscript>
+    <div class="container mx-auto px-4 py-8">
+      <nav class="mb-8">
+        <a href="index.html" class="btn btn-primary inline-block"
+          >← Back to Trainer</a
+        >
+      </nav>
+
+      <div class="bg-white rounded-xl shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">
+          PAO System Reference Guide
+        </h1>
+
+        <div class="prose max-w-none">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+            About the PAO System
+          </h2>
+          <p class="mb-4">
+            The Person-Action-Object (PAO) system is a powerful memory technique
+            used by memory champions to memorize playing cards. Each card is
+            associated with a unique person, action, and object. When memorizing
+            cards in sequence, you create vivid scenes by combining these
+            elements from three consecutive cards.
+          </p>
+
+          <h3 class="text-xl font-semibold text-gray-700 mb-3">
+            System Organization
+          </h3>
+          <p class="mb-4">
+            The mappings are organized by suit, with each suit following a
+            specific theme:
+          </p>
+          <ul class="list-disc pl-6 mb-6">
+            <li>
+              <span class="text-red-600 font-semibold">Hearts (♥)</span>: Story
+              and fantasy characters
+            </li>
+            <li>
+              <span class="text-red-600 font-semibold">Diamonds (♦)</span>:
+              Historical and professional figures
+            </li>
+            <li>
+              <span class="text-gray-900 font-semibold">Clubs (♣)</span>: Greek
+              mythology
+            </li>
+            <li>
+              <span class="text-gray-900 font-semibold">Spades (♠)</span>:
+              Modern icons and celebrities
+            </li>
+          </ul>
+
+          <h3 class="text-xl font-semibold text-gray-700 mb-3">
+            Using the System
+          </h3>
+          <p class="mb-6">
+            To use the system, take three cards in sequence. The first card
+            gives you a person, the second an action, and the third an object.
+            Combine these elements into a vivid, memorable scene. For example,
+            if you draw AH-7D-QS, you would visualize "Shakespeare (AH) forging
+            (7D) a microphone (QS)."
+          </p>
+        </div>
+
+        <div class="mt-12">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-6">
+            Card Mappings by Suit
+          </h2>
+
+          <!-- Hearts Table -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold text-red-600 mb-4">
+              ♥ Hearts - Story and Fantasy Characters
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left">Card</th>
+                    <th class="px-4 py-3 text-left">Person</th>
+                    <th class="px-4 py-3 text-left">Action</th>
+                    <th class="px-4 py-3 text-left">Object</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">A♥</td>
+                    <td class="px-4 py-3">Shakespeare</td>
+                    <td class="px-4 py-3">writing</td>
+                    <td class="px-4 py-3">quill</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">K♥</td>
+                    <td class="px-4 py-3">Thor</td>
+                    <td class="px-4 py-3">swinging</td>
+                    <td class="px-4 py-3">hammer</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">Q♥</td>
+                    <td class="px-4 py-3">Wonder Woman</td>
+                    <td class="px-4 py-3">lassoing</td>
+                    <td class="px-4 py-3">golden lasso</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">J♥</td>
+                    <td class="px-4 py-3">Robin Hood</td>
+                    <td class="px-4 py-3">shooting</td>
+                    <td class="px-4 py-3">bow & arrow</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">10♥</td>
+                    <td class="px-4 py-3">Beethoven</td>
+                    <td class="px-4 py-3">conducting</td>
+                    <td class="px-4 py-3">symphony</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">9♥</td>
+                    <td class="px-4 py-3">Ninja</td>
+                    <td class="px-4 py-3">sneaking</td>
+                    <td class="px-4 py-3">smoke bomb</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">8♥</td>
+                    <td class="px-4 py-3">Chef</td>
+                    <td class="px-4 py-3">cooking</td>
+                    <td class="px-4 py-3">frying pan</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">7♥</td>
+                    <td class="px-4 py-3">Wizard</td>
+                    <td class="px-4 py-3">casting</td>
+                    <td class="px-4 py-3">spell book</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">6♥</td>
+                    <td class="px-4 py-3">Astronaut</td>
+                    <td class="px-4 py-3">floating</td>
+                    <td class="px-4 py-3">space suit</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">5♥</td>
+                    <td class="px-4 py-3">Cowboy</td>
+                    <td class="px-4 py-3">riding</td>
+                    <td class="px-4 py-3">horse</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">4♥</td>
+                    <td class="px-4 py-3">Pirate</td>
+                    <td class="px-4 py-3">sailing</td>
+                    <td class="px-4 py-3">ship</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">3♥</td>
+                    <td class="px-4 py-3">Knight</td>
+                    <td class="px-4 py-3">jousting</td>
+                    <td class="px-4 py-3">lance</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">2♥</td>
+                    <td class="px-4 py-3">Jester</td>
+                    <td class="px-4 py-3">juggling</td>
+                    <td class="px-4 py-3">balls</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Diamonds Table -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold text-red-600 mb-4">
+              ♦ Diamonds - Historical and Professional Figures
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left">Card</th>
+                    <th class="px-4 py-3 text-left">Person</th>
+                    <th class="px-4 py-3 text-left">Action</th>
+                    <th class="px-4 py-3 text-left">Object</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">A♦</td>
+                    <td class="px-4 py-3">Mozart</td>
+                    <td class="px-4 py-3">composing</td>
+                    <td class="px-4 py-3">piano</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">K♦</td>
+                    <td class="px-4 py-3">Napoleon</td>
+                    <td class="px-4 py-3">conquering</td>
+                    <td class="px-4 py-3">sword</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">Q♦</td>
+                    <td class="px-4 py-3">Amelia Earhart</td>
+                    <td class="px-4 py-3">flying</td>
+                    <td class="px-4 py-3">airplane</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">J♦</td>
+                    <td class="px-4 py-3">Indiana Jones</td>
+                    <td class="px-4 py-3">exploring</td>
+                    <td class="px-4 py-3">whip</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">10♦</td>
+                    <td class="px-4 py-3">DaVinci</td>
+                    <td class="px-4 py-3">painting</td>
+                    <td class="px-4 py-3">brush</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">9♦</td>
+                    <td class="px-4 py-3">Sherlock</td>
+                    <td class="px-4 py-3">investigating</td>
+                    <td class="px-4 py-3">magnifying glass</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">8♦</td>
+                    <td class="px-4 py-3">Firefighter</td>
+                    <td class="px-4 py-3">rescuing</td>
+                    <td class="px-4 py-3">hose</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">7♦</td>
+                    <td class="px-4 py-3">Blacksmith</td>
+                    <td class="px-4 py-3">forging</td>
+                    <td class="px-4 py-3">anvil</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">6♦</td>
+                    <td class="px-4 py-3">Scientist</td>
+                    <td class="px-4 py-3">experimenting</td>
+                    <td class="px-4 py-3">microscope</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">5♦</td>
+                    <td class="px-4 py-3">Surgeon</td>
+                    <td class="px-4 py-3">operating</td>
+                    <td class="px-4 py-3">scalpel</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">4♦</td>
+                    <td class="px-4 py-3">Race Car Driver</td>
+                    <td class="px-4 py-3">racing</td>
+                    <td class="px-4 py-3">steering wheel</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">3♦</td>
+                    <td class="px-4 py-3">Gardener</td>
+                    <td class="px-4 py-3">planting</td>
+                    <td class="px-4 py-3">seeds</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-red-600">2♦</td>
+                    <td class="px-4 py-3">Photographer</td>
+                    <td class="px-4 py-3">shooting</td>
+                    <td class="px-4 py-3">camera</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Clubs Table -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              ♣ Clubs - Greek Mythology
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left">Card</th>
+                    <th class="px-4 py-3 text-left">Person</th>
+                    <th class="px-4 py-3 text-left">Action</th>
+                    <th class="px-4 py-3 text-left">Object</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-3">A♣</td>
+                    <td class="px-4 py-3">Hercules</td>
+                    <td class="px-4 py-3">lifting</td>
+                    <td class="px-4 py-3">boulder</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">K♣</td>
+                    <td class="px-4 py-3">Zeus</td>
+                    <td class="px-4 py-3">thundering</td>
+                    <td class="px-4 py-3">lightning bolt</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">Q♣</td>
+                    <td class="px-4 py-3">Medusa</td>
+                    <td class="px-4 py-3">petrifying</td>
+                    <td class="px-4 py-3">snake hair</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">J♣</td>
+                    <td class="px-4 py-3">Poseidon</td>
+                    <td class="px-4 py-3">wave making</td>
+                    <td class="px-4 py-3">trident</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">10♣</td>
+                    <td class="px-4 py-3">Atlas</td>
+                    <td class="px-4 py-3">carrying</td>
+                    <td class="px-4 py-3">globe</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">9♣</td>
+                    <td class="px-4 py-3">Artemis</td>
+                    <td class="px-4 py-3">hunting</td>
+                    <td class="px-4 py-3">silver bow</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">8♣</td>
+                    <td class="px-4 py-3">Dionysus</td>
+                    <td class="px-4 py-3">drinking</td>
+                    <td class="px-4 py-3">wine cup</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">7♣</td>
+                    <td class="px-4 py-3">Aphrodite</td>
+                    <td class="px-4 py-3">charming</td>
+                    <td class="px-4 py-3">mirror</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">6♣</td>
+                    <td class="px-4 py-3">Hades</td>
+                    <td class="px-4 py-3">ruling</td>
+                    <td class="px-4 py-3">helm of darkness</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">5♣</td>
+                    <td class="px-4 py-3">Apollo</td>
+                    <td class="px-4 py-3">healing</td>
+                    <td class="px-4 py-3">lyre</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">4♣</td>
+                    <td class="px-4 py-3">Ares</td>
+                    <td class="px-4 py-3">fighting</td>
+                    <td class="px-4 py-3">spear</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">3♣</td>
+                    <td class="px-4 py-3">Athena</td>
+                    <td class="px-4 py-3">strategizing</td>
+                    <td class="px-4 py-3">shield</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">2♣</td>
+                    <td class="px-4 py-3">Hermes</td>
+                    <td class="px-4 py-3">delivering</td>
+                    <td class="px-4 py-3">winged sandals</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Spades Table -->
+          <div class="mb-12">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              ♠ Spades - Modern Icons and Celebrities
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left">Card</th>
+                    <th class="px-4 py-3 text-left">Person</th>
+                    <th class="px-4 py-3 text-left">Action</th>
+                    <th class="px-4 py-3 text-left">Object</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-3">A♠</td>
+                    <td class="px-4 py-3">Elvis</td>
+                    <td class="px-4 py-3">singing</td>
+                    <td class="px-4 py-3">guitar</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">K♠</td>
+                    <td class="px-4 py-3">Einstein</td>
+                    <td class="px-4 py-3">calculating</td>
+                    <td class="px-4 py-3">chalkboard</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">Q♠</td>
+                    <td class="px-4 py-3">Marilyn Monroe</td>
+                    <td class="px-4 py-3">posing</td>
+                    <td class="px-4 py-3">dress</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">J♠</td>
+                    <td class="px-4 py-3">James Bond</td>
+                    <td class="px-4 py-3">shooting</td>
+                    <td class="px-4 py-3">pistol</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">10♠</td>
+                    <td class="px-4 py-3">Michael Jackson</td>
+                    <td class="px-4 py-3">dancing</td>
+                    <td class="px-4 py-3">glove</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">9♠</td>
+                    <td class="px-4 py-3">Steve Jobs</td>
+                    <td class="px-4 py-3">presenting</td>
+                    <td class="px-4 py-3">iPhone</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">8♠</td>
+                    <td class="px-4 py-3">Oprah</td>
+                    <td class="px-4 py-3">interviewing</td>
+                    <td class="px-4 py-3">microphone</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">7♠</td>
+                    <td class="px-4 py-3">Bruce Lee</td>
+                    <td class="px-4 py-3">kicking</td>
+                    <td class="px-4 py-3">nunchucks</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">6♠</td>
+                    <td class="px-4 py-3">Neil Armstrong</td>
+                    <td class="px-4 py-3">walking</td>
+                    <td class="px-4 py-3">moon</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">5♠</td>
+                    <td class="px-4 py-3">Picasso</td>
+                    <td class="px-4 py-3">painting</td>
+                    <td class="px-4 py-3">canvas</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">4♠</td>
+                    <td class="px-4 py-3">Harry Potter</td>
+                    <td class="px-4 py-3">casting</td>
+                    <td class="px-4 py-3">wand</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">3♠</td>
+                    <td class="px-4 py-3">Batman</td>
+                    <td class="px-4 py-3">fighting</td>
+                    <td class="px-4 py-3">batarang</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3">2♠</td>
+                    <td class="px-4 py-3">Spiderman</td>
+                    <td class="px-4 py-3">swinging</td>
+                    <td class="px-4 py-3">web</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

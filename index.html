@@ -18,7 +18,10 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      // Generate full deck of cards
+      /**
+       * Generates a complete deck of 52 playing cards
+       * @returns {string[]} Array of cards in format 'ranksuit' (e.g., 'AS' for Ace of Spades)
+       */
       const generateDeck = () => {
         const suits = ["H", "D", "C", "S"];
         const ranks = [
@@ -46,24 +49,64 @@
         return deck;
       };
 
-      // Fisher-Yates shuffle algorithm
+      /**
+       * Implements the Fisher-Yates (also known as Knuth) shuffle algorithm
+       * Time complexity: O(n)
+       * Space complexity: O(1)
+       *
+       * Algorithm steps:
+       * 1. Start from the last element
+       * 2. Generate a random index from 0 to current index
+       * 3. Swap current element with randomly selected element
+       * 4. Move to previous element and repeat until first element
+       *
+       * @param {string[]} deck - Array of cards to shuffle
+       * @returns {string[]} New array with shuffled cards
+       */
       const shuffleDeck = (deck) => {
-        for (let i = deck.length - 1; i > 0; i--) {
+        // Create a copy of the deck to avoid mutating the original
+        const shuffled = [...deck];
+
+        // Fisher-Yates shuffle algorithm
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          // Generate random index from 0 to i
           const j = Math.floor(Math.random() * (i + 1));
-          [deck[i], deck[j]] = [deck[j], deck[i]];
+          // Swap elements
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-        return deck;
+
+        return shuffled;
       };
 
+      /**
+       * PAO (Person-Action-Object) System
+       * Maps each playing card to a specific person, action, and object combination
+       * Organized by suits:
+       * - Hearts (♥): Story and fantasy characters
+       * - Diamonds (♦): Historical and professional figures
+       * - Clubs (♣): Greek mythology
+       * - Spades (♠): Modern icons and celebrities
+       */
       const paoSystem = {
         allCards: {},
+
+        /**
+         * Initializes the PAO system with all card mappings
+         * Each card is mapped to an object containing person, action, and object
+         */
         init() {
+          /**
+           * Helper function to add a mapping and log it for debugging
+           * @param {string} card - Card identifier (e.g., 'AS')
+           * @param {Object} pao - Person-Action-Object mapping
+           */
           const addMapping = (card, pao) => {
             this.allCards[card] = pao;
             console.log(`Mapped ${card}:`, pao);
           };
 
-          // Hearts (♥)
+          // Card mappings organized by suits
+          // Hearts (♥) - Fantasy and Story Characters
           addMapping("AH", {
             person: "Shakespeare",
             action: "writing",
@@ -130,7 +173,7 @@
             object: "balls",
           });
 
-          // Diamonds (♦)
+          // Diamonds (♦) - Historical and Professional Figures
           addMapping("AD", {
             person: "Mozart",
             action: "composing",
@@ -197,7 +240,7 @@
             object: "camera",
           });
 
-          // Clubs (♣)
+          // Clubs (♣) - Greek Mythology
           addMapping("AC", {
             person: "Hercules",
             action: "lifting",
@@ -264,7 +307,7 @@
             object: "winged sandals",
           });
 
-          // Spades (♠)
+          // Spades (♠) - Modern Icons and Celebrities
           addMapping("AS", {
             person: "Albert Einstein",
             action: "theorizing",
@@ -332,7 +375,12 @@
           });
         },
 
-        // Add this new method
+        /**
+         * Retrieves a specific PAO value for a given card
+         * @param {string} card - Card identifier (e.g., 'AS')
+         * @param {string} role - Type of value to retrieve ('person', 'action', or 'object')
+         * @returns {string} The requested PAO value or 'Unknown {role}' if not found
+         */
         getPAOValue(card, role) {
           const mapping = this.allCards[card];
           if (!mapping) {
@@ -349,8 +397,20 @@
       // Initialize the PAO system before using it
       paoSystem.init();
 
-      const generateRandomTriplets = () => {
-        const deck = shuffleDeck(generateDeck());
+      /**
+       * Creates randomized sets of three cards (triplets) with their PAO associations
+       * @param {string|null} suitFilter - Optional suit to filter cards by (H, D, C, S)
+       * @returns {Array<Object>} Array of triplet objects containing cards and their PAO values
+       */
+      const generateRandomTriplets = (suitFilter = null) => {
+        let deck = generateDeck();
+
+        // Filter deck by suit if specified
+        if (suitFilter) {
+          deck = deck.filter((card) => card.slice(-1) === suitFilter);
+        }
+
+        deck = shuffleDeck(deck);
         const triplets = [];
 
         for (let i = 0; i < deck.length; i += 3) {
@@ -379,15 +439,112 @@
         return triplets;
       };
 
-      const cardSets = generateRandomTriplets();
+      // Add these helper functions before CardMemoryApp
+      const saveState = (state) => {
+        localStorage.setItem('paoTrainerState', JSON.stringify(state));
+      };
+
+      const loadState = () => {
+        const saved = localStorage.getItem('paoTrainerState');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return null;
+      };
 
       function CardMemoryApp() {
-        const [currentSetIndex, setCurrentSetIndex] = React.useState(0);
-        const [showAnswer, setShowAnswer] = React.useState(false);
-        const [streak, setStreak] = React.useState(0);
+        // Add reset success state
+        const [showResetSuccess, setShowResetSuccess] = React.useState(false);
+
+        // Modify reset function
+        const resetEverything = () => {
+          if (window.confirm('Are you sure you want to reset everything? This will clear all progress and stored data.')) {
+            localStorage.clear();
+            const newCardSets = generateRandomTriplets();
+            setCurrentSetIndex(0);
+            setShowAnswer(false);
+            setStreak(0);
+            setSelectedSuit(null);
+            setCardSets(newCardSets);
+            
+            // Show success message
+            setShowResetSuccess(true);
+            // Hide success message after 3 seconds
+            setTimeout(() => setShowResetSuccess(false), 3000);
+          }
+        };
+
+        // Initialize state from localStorage or use defaults
+        const savedState = loadState();
+        const [currentSetIndex, setCurrentSetIndex] = React.useState(savedState ? savedState.currentSetIndex : 0);
+        const [showAnswer, setShowAnswer] = React.useState(savedState ? savedState.showAnswer : false);
+        const [streak, setStreak] = React.useState(savedState ? savedState.streak : 0);
+        const [selectedSuit, setSelectedSuit] = React.useState(savedState ? savedState.selectedSuit : null);
+        const [cardSets, setCardSets] = React.useState(
+          savedState ? savedState.cardSets : generateRandomTriplets()
+        );
+
+        // Save state whenever it changes
+        React.useEffect(() => {
+          saveState({
+            currentSetIndex,
+            showAnswer,
+            streak,
+            selectedSuit,
+            cardSets
+          });
+        }, [currentSetIndex, showAnswer, streak, selectedSuit, cardSets]);
+
+        const suitInfo = {
+          null: { name: "All Suits", symbol: "♠♥♣♦", class: "text-gray-700" },
+          H: { name: "Hearts", symbol: "♥", class: "text-red-600" },
+          D: { name: "Diamonds", symbol: "♦", class: "text-red-600" },
+          C: { name: "Clubs", symbol: "♣", class: "text-gray-900" },
+          S: { name: "Spades", symbol: "♠", class: "text-gray-900" },
+        };
+
+        const changeSuit = (suit) => {
+          setSelectedSuit(suit);
+          setCardSets(generateRandomTriplets(suit));
+          setCurrentSetIndex(0);
+          setShowAnswer(false);
+          setStreak(0);
+        };
+
+        // Add this new component for suit selection
+        const SuitSelector = () => (
+          <div className="mb-8">
+            <div className="text-center mb-3">
+              <span className="text-sm font-semibold text-gray-600">
+                Select Suit:
+              </span>
+            </div>
+            <div className="flex justify-center gap-2">
+              {Object.entries(suitInfo).map(([suit, info]) => (
+                <button
+                  key={suit || "all"}
+                  onClick={() => changeSuit(suit === "null" ? null : suit)}
+                  className={`px-4 py-2 rounded-lg ${
+                    selectedSuit === (suit === "null" ? null : suit)
+                      ? "bg-gray-200 ring-2 ring-gray-400"
+                      : "bg-white hover:bg-gray-50"
+                  } transition-all duration-200`}
+                >
+                  <span className={`text-xl ${info.class}`}>{info.symbol}</span>
+                  <span className="sr-only">{info.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
 
         const currentSet = cardSets[currentSetIndex];
 
+        /**
+         * Renders a visual representation of a playing card
+         * @param {string} card - Card identifier (e.g., 'AS')
+         * @returns {JSX.Element} Card display component
+         */
         const getCardImage = (card) => {
           const suit = card.slice(-1);
           const rank = card.slice(0, -1);
@@ -411,11 +568,18 @@
           );
         };
 
+        /**
+         * Advances to the next card set and resets answer visibility
+         */
         const nextSet = () => {
           setShowAnswer(false);
           setCurrentSetIndex((prev) => (prev + 1) % cardSets.length);
         };
 
+        /**
+         * Handles user self-assessment and updates streak
+         * @param {boolean} isCorrect - Whether the user got the answer right
+         */
         const checkAnswer = (isCorrect) => {
           if (isCorrect) {
             setStreak((prev) => prev + 1);
@@ -425,118 +589,162 @@
           nextSet();
         };
 
+        // Component render method
         return (
-          <div className="min-h-screen py-12 px-4">
-            <div className="max-w-2xl mx-auto">
-              <div className="bg-white rounded-xl shadow-lg backdrop-blur-sm bg-white/90">
-                <div className="p-8">
-                  <div className="text-center mb-10">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-3">
-                      Card Memory Trainer
-                    </h1>
-                    <div className="inline-block px-4 py-2 bg-indigo-50 rounded-full">
-                      <p className="text-indigo-800 font-semibold">
-                        Current streak: {streak}
-                      </p>
-                    </div>
-                  </div>
+          <React.Fragment>
+            {/* Add Reset Success Notification */}
+            {showResetSuccess && (
+              <div className="fixed top-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg transition-all duration-500 animate-fade-in-down">
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                  </svg>
+                  <p className="font-medium">Reset successful! New cards generated.</p>
+                </div>
+              </div>
+            )}
 
-                  <div className="space-y-8 mb-8">
-                    <div className="flex justify-center gap-6">
-                      {currentSet.cards.map((card, index) => (
-                        <div
-                          key={index}
-                          className="transform transition-all duration-200"
-                        >
-                          {getCardImage(card)}
-                        </div>
-                      ))}
-                    </div>
+            {/* Existing Reset Button */}
+            <button
+              onClick={resetEverything}
+              className="fixed bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5"
+              title="Reset everything"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">Reset All</span>
+            </button>
 
-                    <div className="flex justify-center gap-6">
-                      {["Person", "Action", "Object"].map((type, index) => (
-                        <div key={type} className="w-24 text-center">
-                          <div className="text-sm font-semibold text-gray-600 bg-gray-50 rounded-lg py-1">
-                            {type}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <button
-                      className="w-full btn-primary text-white rounded-lg py-3 px-4 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                      onClick={() => setShowAnswer(true)}
-                      disabled={showAnswer}
-                    >
-                      Show Scene
-                    </button>
-
-                    {showAnswer && (
-                      <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                        <p className="text-center text-xl font-medium text-gray-800 mb-6">
-                          {currentSet.scene}
+            <div className="min-h-screen py-12 px-4">
+              <div className="max-w-2xl mx-auto">
+                <div className="bg-white rounded-xl shadow-lg backdrop-blur-sm bg-white/90">
+                  <div className="p-8">
+                    <div className="text-center mb-10">
+                      <h1 className="text-3xl font-bold text-gray-800 mb-3">
+                        Card Memory Trainer
+                      </h1>
+                      <div className="inline-block px-4 py-2 bg-indigo-50 rounded-full mb-4">
+                        <p className="text-indigo-800 font-semibold">
+                          Current streak: {streak}
                         </p>
-                        <div className="grid grid-cols-3 gap-6 mb-6">
-                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                            <div className="text-sm font-semibold text-gray-800 mb-1">
-                              Person
-                            </div>
-                            <div className="text-sm text-gray-600 mb-1">
-                              {currentSet.person}
-                            </div>
-                            <div className="text-xs font-medium text-indigo-600">
-                              {currentSet.cards[0]}
-                            </div>
-                          </div>
-                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                            <div className="text-sm font-semibold text-gray-800 mb-1">
-                              Action
-                            </div>
-                            <div className="text-sm text-gray-600 mb-1">
-                              {currentSet.action}
-                            </div>
-                            <div className="text-xs font-medium text-indigo-600">
-                              {currentSet.cards[1]}
-                            </div>
-                          </div>
-                          <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                            <div className="text-sm font-semibold text-gray-800 mb-1">
-                              Object
-                            </div>
-                            <div className="text-sm text-gray-600 mb-1">
-                              {currentSet.object}
-                            </div>
-                            <div className="text-xs font-medium text-indigo-600">
-                              {currentSet.cards[2]}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex gap-3">
-                          <button
-                            className="w-1/2 btn-success text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
-                            onClick={() => checkAnswer(true)}
-                          >
-                            <span className="mr-2">✓</span> Got it right
-                          </button>
-                          <button
-                            className="w-1/2 btn-danger text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
-                            onClick={() => checkAnswer(false)}
-                          >
-                            <span className="mr-2">✗</span> Need practice
-                          </button>
-                        </div>
                       </div>
-                    )}
+                      <div className="mt-4">
+                        <a
+                          href="info.html"
+                          className="reference-guide-button inline-flex items-center gap-2 px-6 py-3 text-gray-800 rounded-lg transition-all duration-200 group"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          </svg>
+                          <span className="font-semibold">PAO System Reference Guide</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+
+                    <SuitSelector />
+
+                    <div className="space-y-8 mb-8">
+                      <div className="flex justify-center gap-6">
+                        {currentSet.cards.map((card, index) => (
+                          <div
+                            key={index}
+                            className="transform transition-all duration-200"
+                          >
+                            {getCardImage(card)}
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex justify-center gap-6">
+                        {["Person", "Action", "Object"].map((type, index) => (
+                          <div key={type} className="w-24 text-center">
+                            <div className="text-sm font-semibold text-gray-600 bg-gray-50 rounded-lg py-1">
+                              {type}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <button
+                        className="w-full btn-primary text-white rounded-lg py-3 px-4 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => setShowAnswer(true)}
+                        disabled={showAnswer}
+                      >
+                        Show Scene
+                      </button>
+
+                      {showAnswer && (
+                        <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                          <p className="text-center text-xl font-medium text-gray-800 mb-6">
+                            {currentSet.scene}
+                          </p>
+                          <div className="grid grid-cols-3 gap-6 mb-6">
+                            <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                              <div className="text-sm font-semibold text-gray-800 mb-1">
+                                Person
+                              </div>
+                              <div className="text-sm text-gray-600 mb-1">
+                                {currentSet.person}
+                              </div>
+                              <div className="text-xs font-medium text-indigo-600">
+                                {currentSet.cards[0]}
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                              <div className="text-sm font-semibold text-gray-800 mb-1">
+                                Action
+                              </div>
+                              <div className="text-sm text-gray-600 mb-1">
+                                {currentSet.action}
+                              </div>
+                              <div className="text-xs font-medium text-indigo-600">
+                                {currentSet.cards[1]}
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-white rounded-lg shadow-sm">
+                              <div className="text-sm font-semibold text-gray-800 mb-1">
+                                Object
+                              </div>
+                              <div className="text-sm text-gray-600 mb-1">
+                                {currentSet.object}
+                              </div>
+                              <div className="text-xs font-medium text-indigo-600">
+                                {currentSet.cards[2]}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex gap-3">
+                            <button
+                              className="w-1/2 btn-success text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
+                              onClick={() => checkAnswer(true)}
+                            >
+                              <span className="mr-2">✓</span> Got it right
+                            </button>
+                            <button
+                              className="w-1/2 btn-danger text-white rounded-lg py-3 px-4 font-semibold flex items-center justify-center"
+                              onClick={() => checkAnswer(false)}
+                            >
+                              <span className="mr-2">✗</span> Need practice
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         );
       }
 
+      // Mount the React application
       ReactDOM.render(<CardMemoryApp />, document.getElementById("root"));
     </script>
   </body>
