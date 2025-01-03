@@ -2,7 +2,7 @@
 
 A web-based application to prepare you for memorizing a full deck of playing cards using the Person-Action-Object (PAO) system, a powerful memory technique used by memory athletes.
 
-General info on the PAO memorization system [here](https://en.wikipedia.org/wiki/Person-Action-Object).
+General info on the PAO memorization system [here](https://artofmemory.com/blog/pao-system/).
 
 ## Getting Started
 
@@ -116,75 +116,75 @@ Each suit has a specific theme to help with memorization:
 
 ### Hearts (♥)
 
-| Card | Person       | Action     | Object       |
-| ---- | ------------ | ---------- | ------------ |
-| AH   | Shakespeare  | writing    | quill        |
-| KH   | Thor         | swinging   | hammer       |
-| QH   | Wonder Woman | lassoing   | golden lasso |
-| JH   | Robin Hood   | shooting   | bow & arrow  |
-| 10H  | Beethoven    | conducting | symphony     |
-| 9H   | Ninja        | sneaking   | smoke bomb   |
-| 8H   | Chef         | cooking    | frying pan   |
-| 7H   | Wizard       | casting    | spell book   |
-| 6H   | Astronaut    | floating   | space suit   |
-| 5H   | Cowboy       | riding     | horse        |
-| 4H   | Pirate       | sailing    | ship         |
-| 3H   | Knight       | jousting   | lance        |
-| 2H   | Jester       | juggling   | balls        |
+| Card&nbsp;&nbsp;&nbsp; | Person&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|:---------------------:|:------------------------------------------|:---------------------------|:---------------------------|
+| AH | Shakespeare | writing | quill |
+| KH | Thor | swinging | hammer |
+| QH | Wonder Woman | lassoing | golden lasso |
+| JH | Robin Hood | shooting | bow & arrow |
+| 10H | Beethoven | conducting | symphony |
+| 9H | Ninja | sneaking | smoke bomb |
+| 8H | Chef | cooking | frying pan |
+| 7H | Wizard | casting | spell book |
+| 6H | Astronaut | floating | space suit |
+| 5H | Cowboy | riding | horse |
+| 4H | Pirate | sailing | ship |
+| 3H | Knight | jousting | lance |
+| 2H | Jester | juggling | balls |
 
 ### Diamonds (♦)
 
-| Card | Person          | Action        | Object           |
-| ---- | --------------- | ------------- | ---------------- |
-| AD   | Mozart          | composing     | piano            |
-| KD   | Napoleon        | conquering    | sword            |
-| QD   | Amelia Earhart  | flying        | airplane         |
-| JD   | Indiana Jones   | exploring     | whip             |
-| 10D  | DaVinci         | painting      | brush            |
-| 9D   | Sherlock        | investigating | magnifying glass |
-| 8D   | Firefighter     | rescuing      | hose             |
-| 7D   | Blacksmith      | forging       | anvil            |
-| 6D   | Scientist       | experimenting | microscope       |
-| 5D   | Surgeon         | operating     | scalpel          |
-| 4D   | Race Car Driver | racing        | steering wheel   |
-| 3D   | Gardener        | planting      | seeds            |
-| 2D   | Photographer    | shooting      | camera           |
+| Card&nbsp;&nbsp;&nbsp; | Person&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|:---------------------:|:------------------------------------------|:---------------------------|:---------------------------|
+| AD | Mozart | composing | piano |
+| KD | Napoleon | conquering | sword |
+| QD | Amelia Earhart | flying | airplane |
+| JD | Indiana Jones | exploring | whip |
+| 10D | DaVinci | painting | brush |
+| 9D | Sherlock | investigating | magnifying glass |
+| 8D | Firefighter | rescuing | hose |
+| 7D | Blacksmith | forging | anvil |
+| 6D | Scientist | experimenting | microscope |
+| 5D | Surgeon | operating | scalpel |
+| 4D | Race Car Driver | racing | steering wheel |
+| 3D | Gardener | planting | seeds |
+| 2D | Photographer | shooting | camera |
 
 ### Clubs (♣)
 
-| Card | Person    | Action       | Object           |
-| ---- | --------- | ------------ | ---------------- |
-| AC   | Hercules  | lifting      | boulder          |
-| KC   | Zeus      | thundering   | lightning bolt   |
-| QC   | Medusa    | petrifying   | snake hair       |
-| JC   | Poseidon  | wave making  | trident          |
-| 10C  | Atlas     | carrying     | globe            |
-| 9C   | Artemis   | hunting      | silver bow       |
-| 8C   | Dionysus  | drinking     | wine cup         |
-| 7C   | Aphrodite | charming     | mirror           |
-| 6C   | Hades     | ruling       | helm of darkness |
-| 5C   | Apollo    | healing      | lyre             |
-| 4C   | Ares      | fighting     | spear            |
-| 3C   | Athena    | strategizing | shield           |
-| 2C   | Hermes    | delivering   | winged sandals   |
+| Card&nbsp;&nbsp;&nbsp; | Person&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|:---------------------:|:------------------------------------------|:---------------------------|:---------------------------|
+| AC | Hercules | lifting | boulder |
+| KC | Zeus | thundering | lightning bolt |
+| QC | Medusa | petrifying | snake hair |
+| JC | Poseidon | wave making | trident |
+| 10C | Atlas | carrying | globe |
+| 9C | Artemis | hunting | silver bow |
+| 8C | Dionysus | drinking | wine cup |
+| 7C | Aphrodite | charming | mirror |
+| 6C | Hades | ruling | helm of darkness |
+| 5C | Apollo | healing | lyre |
+| 4C | Ares | fighting | spear |
+| 3C | Athena | strategizing | shield |
+| 2C | Hermes | delivering | winged sandals |
 
 ### Spades (♠)
 
-| Card | Person                | Action        | Object        |
-| ---- | --------------------- | ------------- | ------------- |
-| AS   | Albert Einstein       | theorizing    | blackboard    |
-| KS   | Arnold Schwarzenegger | lifting       | dumbbell      |
-| QS   | Lady Gaga             | singing       | microphone    |
-| JS   | Bruce Lee             | kicking       | nunchucks     |
-| 10S  | Elvis Presley         | dancing       | guitar        |
-| 9S   | Muhammad Ali          | boxing        | gloves        |
-| 8S   | Marilyn Monroe        | posing        | white dress   |
-| 7S   | Houdini               | escaping      | chains        |
-| 6S   | Marie Curie           | experimenting | test tube     |
-| 5S   | Michael Jordan        | dunking       | basketball    |
-| 4S   | Serena Williams       | serving       | tennis racket |
-| 3S   | David Copperfield     | levitating    | magic wand    |
-| 2S   | Charlie Chaplin       | waddling      | cane          |
+| Card&nbsp;&nbsp;&nbsp; | Person&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|:---------------------:|:------------------------------------------|:---------------------------|:---------------------------|
+| AS | Albert Einstein | theorizing | blackboard |
+| KS | Arnold Schwarzenegger | lifting | dumbbell |
+| QS | Lady Gaga | singing | microphone |
+| JS | Bruce Lee | kicking | nunchucks |
+| 10S | Elvis Presley | dancing | guitar |
+| 9S | Muhammad Ali | boxing | gloves |
+| 8S | Marilyn Monroe | posing | white dress |
+| 7S | Houdini | escaping | chains |
+| 6S | Marie Curie | experimenting | test tube |
+| 5S | Michael Jordan | dunking | basketball |
+| 4S | Serena Williams | serving | tennis racket |
+| 3S | David Copperfield | levitating | magic wand |
+| 2S | Charlie Chaplin | waddling | cane |
 
 ## Practice Strategy
 
