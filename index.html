@@ -18,99 +18,368 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      const cardSets = [
-        {
-          cards: ["AS", "KH", "QD"],
-          person: "Albert Einstein",
-          action: "juggling",
-          object: "glowing lightbulb",
-          scene: "Einstein juggling lightbulbs",
+      // Generate full deck of cards
+      const generateDeck = () => {
+        const suits = ["H", "D", "C", "S"];
+        const ranks = [
+          "A",
+          "K",
+          "Q",
+          "J",
+          "10",
+          "9",
+          "8",
+          "7",
+          "6",
+          "5",
+          "4",
+          "3",
+          "2",
+        ];
+        const deck = [];
+
+        for (let suit of suits) {
+          for (let rank of ranks) {
+            deck.push(rank + suit);
+          }
+        }
+        return deck;
+      };
+
+      // Fisher-Yates shuffle algorithm
+      const shuffleDeck = (deck) => {
+        for (let i = deck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        return deck;
+      };
+
+      const paoSystem = {
+        allCards: {},
+        init() {
+          const addMapping = (card, pao) => {
+            this.allCards[card] = pao;
+            console.log(`Mapped ${card}:`, pao);
+          };
+
+          // Hearts (♥)
+          addMapping("AH", {
+            person: "Shakespeare",
+            action: "writing",
+            object: "quill",
+          });
+          addMapping("KH", {
+            person: "Thor",
+            action: "swinging",
+            object: "hammer",
+          });
+          addMapping("QH", {
+            person: "Wonder Woman",
+            action: "lassoing",
+            object: "golden lasso",
+          });
+          addMapping("JH", {
+            person: "Robin Hood",
+            action: "shooting",
+            object: "bow & arrow",
+          });
+          addMapping("10H", {
+            person: "Beethoven",
+            action: "conducting",
+            object: "symphony",
+          });
+          addMapping("9H", {
+            person: "Ninja",
+            action: "sneaking",
+            object: "smoke bomb",
+          });
+          addMapping("8H", {
+            person: "Chef",
+            action: "cooking",
+            object: "frying pan",
+          });
+          addMapping("7H", {
+            person: "Wizard",
+            action: "casting",
+            object: "spell book",
+          });
+          addMapping("6H", {
+            person: "Astronaut",
+            action: "floating",
+            object: "space suit",
+          });
+          addMapping("5H", {
+            person: "Cowboy",
+            action: "riding",
+            object: "horse",
+          });
+          addMapping("4H", {
+            person: "Pirate",
+            action: "sailing",
+            object: "ship",
+          });
+          addMapping("3H", {
+            person: "Knight",
+            action: "jousting",
+            object: "lance",
+          });
+          addMapping("2H", {
+            person: "Jester",
+            action: "juggling",
+            object: "balls",
+          });
+
+          // Diamonds (♦)
+          addMapping("AD", {
+            person: "Mozart",
+            action: "composing",
+            object: "piano",
+          });
+          addMapping("KD", {
+            person: "Napoleon",
+            action: "conquering",
+            object: "sword",
+          });
+          addMapping("QD", {
+            person: "Amelia Earhart",
+            action: "flying",
+            object: "airplane",
+          });
+          addMapping("JD", {
+            person: "Indiana Jones",
+            action: "exploring",
+            object: "whip",
+          });
+          addMapping("10D", {
+            person: "DaVinci",
+            action: "painting",
+            object: "brush",
+          });
+          addMapping("9D", {
+            person: "Sherlock",
+            action: "investigating",
+            object: "magnifying glass",
+          });
+          addMapping("8D", {
+            person: "Firefighter",
+            action: "rescuing",
+            object: "hose",
+          });
+          addMapping("7D", {
+            person: "Blacksmith",
+            action: "forging",
+            object: "anvil",
+          });
+          addMapping("6D", {
+            person: "Scientist",
+            action: "experimenting",
+            object: "microscope",
+          });
+          addMapping("5D", {
+            person: "Surgeon",
+            action: "operating",
+            object: "scalpel",
+          });
+          addMapping("4D", {
+            person: "Race Car Driver",
+            action: "racing",
+            object: "steering wheel",
+          });
+          addMapping("3D", {
+            person: "Gardener",
+            action: "planting",
+            object: "seeds",
+          });
+          addMapping("2D", {
+            person: "Photographer",
+            action: "shooting",
+            object: "camera",
+          });
+
+          // Clubs (♣)
+          addMapping("AC", {
+            person: "Hercules",
+            action: "lifting",
+            object: "boulder",
+          });
+          addMapping("KC", {
+            person: "Zeus",
+            action: "thundering",
+            object: "lightning bolt",
+          });
+          addMapping("QC", {
+            person: "Medusa",
+            action: "petrifying",
+            object: "snake hair",
+          });
+          addMapping("JC", {
+            person: "Poseidon",
+            action: "wave making",
+            object: "trident",
+          });
+          addMapping("10C", {
+            person: "Atlas",
+            action: "carrying",
+            object: "globe",
+          });
+          addMapping("9C", {
+            person: "Artemis",
+            action: "hunting",
+            object: "silver bow",
+          });
+          addMapping("8C", {
+            person: "Dionysus",
+            action: "drinking",
+            object: "wine cup",
+          });
+          addMapping("7C", {
+            person: "Aphrodite",
+            action: "charming",
+            object: "mirror",
+          });
+          addMapping("6C", {
+            person: "Hades",
+            action: "ruling",
+            object: "helm of darkness",
+          });
+          addMapping("5C", {
+            person: "Apollo",
+            action: "healing",
+            object: "lyre",
+          });
+          addMapping("4C", {
+            person: "Ares",
+            action: "fighting",
+            object: "spear",
+          });
+          addMapping("3C", {
+            person: "Athena",
+            action: "strategizing",
+            object: "shield",
+          });
+          addMapping("2C", {
+            person: "Hermes",
+            action: "delivering",
+            object: "winged sandals",
+          });
+
+          // Spades (♠)
+          addMapping("AS", {
+            person: "Albert Einstein",
+            action: "theorizing",
+            object: "blackboard",
+          });
+          addMapping("KS", {
+            person: "Arnold Schwarzenegger",
+            action: "lifting",
+            object: "dumbbell",
+          });
+          addMapping("QS", {
+            person: "Lady Gaga",
+            action: "singing",
+            object: "microphone",
+          });
+          addMapping("JS", {
+            person: "Bruce Lee",
+            action: "kicking",
+            object: "nunchucks",
+          });
+          addMapping("10S", {
+            person: "Elvis Presley",
+            action: "dancing",
+            object: "guitar",
+          });
+          addMapping("9S", {
+            person: "Muhammad Ali",
+            action: "boxing",
+            object: "gloves",
+          });
+          addMapping("8S", {
+            person: "Marilyn Monroe",
+            action: "posing",
+            object: "white dress",
+          });
+          addMapping("7S", {
+            person: "Houdini",
+            action: "escaping",
+            object: "chains",
+          });
+          addMapping("6S", {
+            person: "Marie Curie",
+            action: "experimenting",
+            object: "test tube",
+          });
+          addMapping("5S", {
+            person: "Michael Jordan",
+            action: "dunking",
+            object: "basketball",
+          });
+          addMapping("4S", {
+            person: "Serena Williams",
+            action: "serving",
+            object: "tennis racket",
+          });
+          addMapping("3S", {
+            person: "David Copperfield",
+            action: "levitating",
+            object: "magic wand",
+          });
+          addMapping("2S", {
+            person: "Charlie Chaplin",
+            action: "waddling",
+            object: "cane",
+          });
         },
-        {
-          cards: ["JC", "10S", "9H"],
-          person: "Bruce Lee",
-          action: "karate chopping",
-          object: "brick wall",
-          scene: "Bruce Lee karate chopping a brick wall",
+
+        // Add this new method
+        getPAOValue(card, role) {
+          const mapping = this.allCards[card];
+          if (!mapping) {
+            console.warn(`No mapping found for card: ${card}`);
+            return `Unknown ${role}`;
+          }
+          if (role === "person") return mapping.person;
+          if (role === "action") return mapping.action;
+          if (role === "object") return mapping.object;
+          return `Unknown ${role}`;
         },
-        {
-          cards: ["8D", "7C", "6S"],
-          person: "Marilyn Monroe",
-          action: "dancing",
-          object: "red dress",
-          scene: "Marilyn Monroe dancing in a red dress",
-        },
-        {
-          cards: ["5H", "4D", "3C"],
-          person: "Michael Jordan",
-          action: "slam dunking",
-          object: "golden basketball",
-          scene: "Michael Jordan slam dunking a golden basketball",
-        },
-        {
-          cards: ["2S", "AH", "KC"],
-          person: "Charlie Chaplin",
-          action: "tap dancing",
-          object: "black cane",
-          scene: "Charlie Chaplin tap dancing with a black cane",
-        },
-        {
-          cards: ["QS", "JD", "10H"],
-          person: "Lady Gaga",
-          action: "singing",
-          object: "grand piano",
-          scene: "Lady Gaga singing at a grand piano",
-        },
-        {
-          cards: ["9C", "8S", "7H"],
-          person: "Muhammad Ali",
-          action: "boxing",
-          object: "golden gloves",
-          scene: "Muhammad Ali boxing with golden gloves",
-        },
-        {
-          cards: ["6D", "5C", "4S"],
-          person: "Marie Curie",
-          action: "pouring",
-          object: "glowing test tube",
-          scene: "Marie Curie pouring a glowing test tube",
-        },
-        {
-          cards: ["3H", "2D", "AC"],
-          person: "David Copperfield",
-          action: "levitating",
-          object: "magic wand",
-          scene: "David Copperfield levitating a magic wand",
-        },
-        {
-          cards: ["KS", "QH", "JC"],
-          person: "Arnold Schwarzenegger",
-          action: "lifting",
-          object: "giant dumbbell",
-          scene: "Arnold lifting a giant dumbbell",
-        },
-        {
-          cards: ["10D", "9S", "8C"],
-          person: "Elvis Presley",
-          action: "strumming",
-          object: "blue suede shoes",
-          scene: "Elvis strumming in blue suede shoes",
-        },
-        {
-          cards: ["7D", "6H", "5S"],
-          person: "Houdini",
-          action: "escaping",
-          object: "steel chains",
-          scene: "Houdini escaping from steel chains",
-        },
-        {
-          cards: ["4H", "3D", "2C"],
-          person: "Serena Williams",
-          action: "serving",
-          object: "tennis racket",
-          scene: "Serena Williams serving with a tennis racket",
-        },
-      ];
+      };
+
+      // Initialize the PAO system before using it
+      paoSystem.init();
+
+      const generateRandomTriplets = () => {
+        const deck = shuffleDeck(generateDeck());
+        const triplets = [];
+
+        for (let i = 0; i < deck.length; i += 3) {
+          if (i + 2 < deck.length) {
+            const cards = [deck[i], deck[i + 1], deck[i + 2]];
+
+            // These calls will now work since getPAOValue is defined
+            const person = paoSystem.getPAOValue(cards[0], "person");
+            const action = paoSystem.getPAOValue(cards[1], "action");
+            const object = paoSystem.getPAOValue(cards[2], "object");
+
+            console.log("Processing triplet:", {
+              cards,
+              found: { person, action, object },
+            });
+
+            triplets.push({
+              cards,
+              person,
+              action,
+              object,
+              scene: `${person} ${action} ${object}`,
+            });
+          }
+        }
+        return triplets;
+      };
+
+      const cardSets = generateRandomTriplets();
 
       function CardMemoryApp() {
         const [currentSetIndex, setCurrentSetIndex] = React.useState(0);
